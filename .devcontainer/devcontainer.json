@@ -1,0 +1,12 @@
+{
+    "name": "csel",
+    "dockerComposeFile": "docker-compose.yml",
+    "service": "toolchain",
+    "workspaceFolder": "/workspace",
+    "shutdownAction": "stopCompose",
+
+    "settings": {},
+    "extensions": [
+        "ms-vscode.cpptools"
+    ]
+}

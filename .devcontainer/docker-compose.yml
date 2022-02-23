@@ -1,0 +1,44 @@
+services:
+  toolchain:
+    image: csel/toolchain
+    build:
+      context: toolchain
+      dockerfile: Dockerfile
+    cap_add:
+    - SYS_PTRACE
+    security_opt:
+    - seccomp:unconfined
+    volumes:
+      - ..:/workspace:cached
+      - buildroot:/buildroot
+      - rootfs:/rootfs
+      - home:/root-home
+      
+    # Overrides default command so things don't shut down after the process ends.
+    command: /bin/sh -c "while sleep 1000; do :; done"  
+
+  samba:
+    image: dperson/samba
+    environment:
+      USERID: 0
+      GROUPID: 0
+    command: >-
+      -S 
+      -u "root;toor"
+      -s "buildroot;/buildroot;no;no"
+      -s "rootfs;/rootfs;no;no"
+      -s "workspace;/workspace;no;no"
+      -s "home;/root-home;no;no"
+    ports:
+      - "139:139"
+      - "1445:445"
+    volumes:
+      - ..:/workspace:cached
+      - buildroot:/buildroot
+      - rootfs:/rootfs
+      - home:/root-home
+
+volumes:
+  buildroot: {}
+  rootfs: {}
+  home: {}
