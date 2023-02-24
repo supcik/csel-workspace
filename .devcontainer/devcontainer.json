@@ -4,6 +4,7 @@
     "service": "toolchain",
     "workspaceFolder": "/workspace",
     "shutdownAction": "stopCompose",
+    "remoteUser": "root",
 
     "settings": {},
     "extensions": [
